@@ -1,5 +1,9 @@
 const express = require("express");
 
+// When Heroku run sour app it sets an environment variable called `process.env.PORT`
+// Tell our app to use that port, if it has been set, and if not, default to port
+const PORT = process.env.PORT || 3001;
+
 const app = express();
 
 const { animals } = require("./data/animals.json");
@@ -59,6 +63,6 @@ app.get("/api/animals", (req, res) => {
   res.json(results);
 });
 
-app.listen(3001, () => {
-  console.log(`API server now on port 3001`);
+app.listen(PORT, () => {
+  console.log(`API server now on port ${PORT}`);
 });
