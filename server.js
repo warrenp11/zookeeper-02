@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 const express = require("express");
 
 // When Heroku run sour app it sets an environment variable called `process.env.PORT`
@@ -68,6 +71,12 @@ function createNewAnimal(body, animalsArray) {
   // function's main code will go below!
   const animal = body;
   animalsArray.push(animal);
+
+  // update to write animals.json
+  fs.writeFileSync(
+    path.join(__dirname, "./data/animals.json"),
+    JSON.stringify({ animals: animalsArray }, null, 2)
+  );
   // return finished code to POST route for response
   return body;
 }
