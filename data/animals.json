@@ -117,6 +117,19 @@
         "hungry"
       ],
       "id": "11"
+    },
+    {
+      "name": "grace",
+      "species": "dog",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry",
+        "zany",
+        "anxious",
+        "loving",
+        "goofy"
+      ],
+      "id": "12"
     }
   ]
 }
