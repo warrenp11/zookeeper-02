@@ -9,10 +9,13 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+// Express.js middleware:
 // parse incoming string or array data (from POST route)
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
+// Express.js middleware that instructs the server to make certain files readily available and to not gate it behind a server endpoint
+app.use(express.static("public"));
 
 const { animals } = require("./data/animals.json");
 
@@ -132,12 +135,17 @@ app.post("/api/animals", (req, res) => {
 
   // if any datat in `req.body` is incorrect, send 400 error back
   if (!validateAnimal(req.body)) {
-    res.status(400).send('The animal is not properly formatted');
+    res.status(400).send("The animal is not properly formatted");
   } else {
     // add animal to json file and animals array in this function
     const animal = createNewAnimal(req.body, animals);
     res.json(animal);
   }
+});
+
+// create routes to serve index.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
 app.listen(PORT, () => {
