@@ -6,6 +6,11 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+// parse incoming string or array data (from POST route)
+app.use(express.urlencoded({ extended: true }));
+// parse incoming JSON data
+app.use(express.json());
+
 const { animals } = require("./data/animals.json");
 
 // takes in `req.query` as an argument and filters through the animals accordingly, returning new filtered array
@@ -80,6 +85,13 @@ app.get("/api/animals/:id", (req, res) => {
     // res.send(404); (Deprecated: use `res.sendStatus(status)` instead)
     res.sendStatus(404);
   }
+});
+
+// POST route, client-side
+app.post("/api/animals", (req, res) => {
+  // req.body is where our incoming content will be
+  // console.log(req.body);
+  res.json(req.body);
 });
 
 app.listen(PORT, () => {
