@@ -148,6 +148,21 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
+// route to animals.html
+app.get("/animals", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/animals.html"));
+});
+
+// route to zookeepers.html
+app.get("/zookeepers", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/zookeepers.html"));
+});
+
+// wildcard route, to catch requests client would make for a route that doesn't exist
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`API server now on port ${PORT}`);
 });
